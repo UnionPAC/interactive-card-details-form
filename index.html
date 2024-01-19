@@ -16,53 +16,87 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <title>Interactive card details form</title>
+    <script src="main.js" defer></script>
+    <title>Interactive Card Details Form</title>
   </head>
   <body>
     <div class="cards">
       <div class="card-front">
-        <img src="./images/card-logo.svg" alt="" />
-        <p>0000 0000 0000 0000</p>
+        <img
+          src="./images/card-logo.svg"
+          alt="Front of a credit card with a purple gradient, and accents of blue, orange and pink"
+        />
+        <p id="cardNumber">0000 0000 0000 0000</p>
         <div class="card-info">
-          <p>Jane Appleseed</p>
-          <p>00/00</p>
+          <p id="cardName">Jane Appleseed</p>
+          <p><span id="cardMonth">00</span>/<span id="cardYear">00</span></p>
         </div>
       </div>
       <div class="card-back">
-        <p>000</p>
+        <p id="cardCvc">000</p>
       </div>
     </div>
-    <form action="" class="payment-form">
-      <label for="cardholderName">Cardholder Name</label>
-      <input
-        type="text"
-        id="cardholderName"
-        name="cardholderName"
-        placeholder="e.g. Jane Appleseed"
-      />
+    <div class="main-content">
+      <form class="payment-form" name="paymentForm" id="paymentForm">
+        <label for="name">Cardholder Name</label>
+        <input
+          type="text"
+          id="name"
+          name="cardholderName"
+          placeholder="e.g. Jane Appleseed"
+          maxlength="28"
+        />
+        <div class="name-error error"></div>
+        <label for="number">Card Number</label>
+        <input
+          type="text"
+          id="number"
+          name="cardNumber"
+          placeholder="e.g. 1234 5678 9123 0000"
+          oninput="formatCreditCard(this)"
+          maxlength="19"
+        />
+        <div class="num-error error"></div>
+        <div class="flex-row">
+          <div class="expiration">
+            <label for="expirationDate">Exp. Date (MM/YY)</label>
+            <div class="date-group">
+              <input
+                type="text"
+                id="month"
+                name="month"
+                placeholder="MM"
+                maxlength="2"
+                oninput="formatOnlyNum(this)"
+              />
 
-      <label for="cardNumber">Card Number</label>
-      <input
-        type="text"
-        id="cardNumber"
-        name="cardNumber"
-        placeholder="e.g. 1234 5678 9123 0000"
-      />
+              <input
+                type="text"
+                id="year"
+                name="year"
+                placeholder="YY"
+                maxlength="2"
+                oninput="formatOnlyNum(this)"
+              />
+            </div>
+            <div class="date-error error"></div>
+          </div>
 
-      <label for="expirationDate">Exp. Date (MM/YY)</label>
-
-      <input type="text" id="month" name="month" placeholder="MM" />
-      <input type="text" id="year" name="year" placeholder="YY" />
-
-      <label for="cvc">CVC</label>
-      <input type="text" id="cvc" name="cvc" placeholder="e.g. 123" />
-
-      <button class="btn">Confirm</button>
-    </form>
-
-    <img src="./images/icon-complete.svg" alt="" />
-    <h2>Thank You!</h2>
-    <p>We've added your card details</p>
-    <button>Continue</button>
+          <div class="cvc">
+            <label for="cvc">CVC</label>
+            <input
+              type="text"
+              id="cvc"
+              name="cvc"
+              placeholder="e.g. 123"
+              maxlength="3"
+              oninput="formatOnlyNum(this)"
+            />
+            <div class="cvc-error error"></div>
+          </div>
+        </div>
+        <button class="btn" type="submit">Confirm</button>
+      </form>
+    </div>
   </body>
 </html>
